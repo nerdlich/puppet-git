@@ -27,7 +27,7 @@ define git::pull ($localtree = '/srv/git/',
 	@exec { "git_pull_exec_${name}":
 		command => '/usr/bin/git pull',
 		cwd     => "${localtree}/${real_name}",
-		onlyif  => [ "test -d ${localtree}/${real_name}/.git/info", "test $(cd ${localtree}/${real_name} && git status -uno | grep -c behind) -gt 0" ],
+		onlyif  => [ "test -d ${localtree}/${real_name}/.git/info", "test $(cd ${localtree}/${real_name} && git remote update origin && git status -uno | grep -c behind) -gt 0" ],
 	}
 
 	case $branch {
